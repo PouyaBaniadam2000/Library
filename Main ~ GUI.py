@@ -1,3 +1,5 @@
+import os
+import sys
 import pyperclip
 from tkinter import filedialog
 from tkinter import *
@@ -6,13 +8,23 @@ from openpyxl import load_workbook
 from pandas import DataFrame
 
 
+def resource_path(relative_path):
+    global base_path
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath("Assets\\Images")
+
+    return os.path.join(base_path, relative_path)
+
+
 def main_menu():
     """Back-End of buttons start here"""
 
     def read_from_excel():
         global all_rows
         global book
-        book = load_workbook("database\\LibraryDataBase.xlsx")
+        book = load_workbook("DataBase\\LibraryDataBase.xlsx")
         global sheet
         sheet = book.active
         rows = sheet.rows
@@ -85,11 +97,11 @@ def main_menu():
                     global return_to_main_menu_btn
                     global back_btn
 
-                    bg65 = PhotoImage(file="assets\\cannotleavethebarcodeinputblank.png")
+                    bg65 = PhotoImage(file=resource_path("cannotleavethebarcodeinputblank.png"))
                     bg65_label = Label(root, image=bg65)
                     bg65_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -97,7 +109,7 @@ def main_menu():
                                                           command=main_menu)
                     real_return_to_main_menu_btn.place(x=850, y=585)
 
-                    back_btn = PhotoImage(file="assets\\back_button.png")
+                    back_btn = PhotoImage(file=resource_path("back_button.png"))
                     back_btn_label = Label(image=back_btn)
 
                     real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -112,7 +124,7 @@ def main_menu():
 
                     if name in temp_list:
                         global bg64
-                        bg64 = PhotoImage(file="assets\\bookinfo.png")
+                        bg64 = PhotoImage(file=resource_path("bookinfo.png"))
                         bg64_label = Label(root, image=bg64)
                         bg64_label.place(x=0, y=0)
 
@@ -127,45 +139,45 @@ def main_menu():
                         how_many_sold1 = g["how_many_sold"]
                         how_many_left1 = g["how_many_left"]
 
-                        book_name_label = Label(root, text=book_name1, border=0, background="#3A3A3A",
+                        book_name_label = Label(root, text=book_name1, border=0, background="#252525",
                                                 font=("Andalus", 35), fg="white")
                         book_name_label.place(x=560, y=235)
 
-                        author_label = Label(root, text=author1, border=0, background="#3A3A3A", font=("Andalus", 35),
+                        author_label = Label(root, text=author1, border=0, background="#252525", font=("Andalus", 35),
                                              fg="white")
                         author_label.place(x=480, y=295)
 
-                        release_date_label = Label(root, text=release_date1, border=0, background="#3A3A3A",
+                        release_date_label = Label(root, text=release_date1, border=0, background="#252525",
                                                    font=("Andalus", 35), fg="white")
                         release_date_label.place(x=550, y=355)
 
-                        bar_code_label = Label(root, text=bars_code1, border=0, background="#3A3A3A",
+                        bar_code_label = Label(root, text=bars_code1, border=0, background="#252525",
                                                font=("Andalus", 35), fg="white")
                         bar_code_label.place(x=510, y=415)
 
-                        how_many_sold_label = Label(root, text=how_many_sold1, border=0, background="#3A3A3A",
+                        how_many_sold_label = Label(root, text=how_many_sold1, border=0, background="#252525",
                                                     font=("Andalus", 35), fg="white")
                         how_many_sold_label.place(x=610, y=475)
 
-                        how_many_left_label = Label(root, text=how_many_left1, border=0, background="#3A3A3A",
+                        how_many_left_label = Label(root, text=how_many_left1, border=0, background="#252525",
                                                     font=("Andalus", 35), fg="white")
                         how_many_left_label.place(x=610, y=535)
 
                         saving_file = f"Book name : {book_name1}\nAuthor : {author1}\nRelease date : {release_date1}\nBar-code : {bars_code1}\nHow many sold : {how_many_sold1}\nHow many left : {how_many_left1}"
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\greenreturntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("greenreturntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
-                                                              bg="#3A3A3A", width=250, height=200,
-                                                              activebackground="#3A3A3A", border=0, command=main_menu)
+                                                              bg="#252525", width=250, height=200,
+                                                              activebackground="#252525", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=1080, y=260)
 
-                        save_as_txt_btn = PhotoImage(file="assets\\saveastxt_button.png")
+                        save_as_txt_btn = PhotoImage(file=resource_path("saveastxt_button.png"))
                         save_as_txt_btn_label = Label(image=save_as_txt_btn)
 
-                        real_save_as_txt_btn = Button(root, text="Start", image=save_as_txt_btn, bg="#3A3A3A",
-                                                      width=280, height=220, activebackground="#3A3A3A", border=0,
+                        real_save_as_txt_btn = Button(root, text="Start", image=save_as_txt_btn, bg="#252525",
+                                                      width=280, height=220, activebackground="#252525", border=0,
                                                       command=save_as_txt_file)
                         real_save_as_txt_btn.place(x=1075, y=480)
 
@@ -173,11 +185,11 @@ def main_menu():
                     else:
                         global bg66
 
-                        bg66 = PhotoImage(file="assets\\sorryitseemsthatthisbookdoesntexistsinyourlibrary.png")
+                        bg66 = PhotoImage(file=resource_path("sorryitseemsthatthisbookdoesntexistsinyourlibrary.png"))
                         bg66_label = Label(root, image=bg66)
                         bg66_label.place(x=0, y=0)
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -185,25 +197,25 @@ def main_menu():
                                                               activebackground="black", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=850, y=585)
 
-                        back_btn = PhotoImage(file="assets\\back_button.png")
+                        back_btn = PhotoImage(file=resource_path("back_button.png"))
                         back_btn_label = Label(image=back_btn)
 
                         real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
                                                activebackground="black", border=0, command=search_by_name)
                         real_back_btn.place(x=400, y=585)
 
-            bg68 = PhotoImage(file="assets\\searchbyname_screen.png")
+            bg68 = PhotoImage(file=resource_path("searchbyname_screen.png"))
             bg68_label = Label(root, image=bg68)
             bg68_label.place(x=0, y=0)
 
-            submit_btn = PhotoImage(file="assets\\submit_button.png")
+            submit_btn = PhotoImage(file=resource_path("submit_button.png"))
             submit_btn_label = Label(image=submit_btn)
 
             real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#272727", width=250, height=200,
                                      activebackground="#272727", border=0, command=submit)
             real_submit_btn.place(x=845, y=585)
 
-            back_btn = PhotoImage(file="assets\\back_button.png")
+            back_btn = PhotoImage(file=resource_path("back_button.png"))
             back_btn_label = Label(image=back_btn)
 
             real_back_btn = Button(root, text="Start", image=back_btn, bg="#272727", width=250, height=200,
@@ -239,11 +251,11 @@ def main_menu():
                     global return_to_main_menu_btn
                     global back_btn
 
-                    bg65 = PhotoImage(file="assets\\cannotleavethebarcodeinputblank.png")
+                    bg65 = PhotoImage(file=resource_path("cannotleavethebarcodeinputblank.png"))
                     bg65_label = Label(root, image=bg65)
                     bg65_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -251,7 +263,7 @@ def main_menu():
                                                           command=main_menu)
                     real_return_to_main_menu_btn.place(x=850, y=585)
 
-                    back_btn = PhotoImage(file="assets\\back_button.png")
+                    back_btn = PhotoImage(file=resource_path("back_button.png"))
                     back_btn_label = Label(image=back_btn)
 
                     real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -266,7 +278,7 @@ def main_menu():
 
                     if int(barss_code) in temp_list or str(barss_code) in temp_list:
                         global bg64
-                        bg64 = PhotoImage(file="assets\\bookinfo.png")
+                        bg64 = PhotoImage(file=resource_path("bookinfo.png"))
                         bg64_label = Label(root, image=bg64)
                         bg64_label.place(x=0, y=0)
 
@@ -279,45 +291,45 @@ def main_menu():
                                 how_many_sold1 = g["how_many_sold"]
                                 how_many_left1 = g["how_many_left"]
 
-                        book_name_label = Label(root, text=book_name1, border=0, background="#3A3A3A",
+                        book_name_label = Label(root, text=book_name1, border=0, background="#252525",
                                                 font=("Andalus", 35), fg="white")
                         book_name_label.place(x=560, y=235)
 
-                        author_label = Label(root, text=author1, border=0, background="#3A3A3A", font=("Andalus", 35),
+                        author_label = Label(root, text=author1, border=0, background="#252525", font=("Andalus", 35),
                                              fg="white")
                         author_label.place(x=480, y=295)
 
-                        release_date_label = Label(root, text=release_date1, border=0, background="#3A3A3A",
+                        release_date_label = Label(root, text=release_date1, border=0, background="#252525",
                                                    font=("Andalus", 35), fg="white")
                         release_date_label.place(x=550, y=355)
 
-                        bar_code_label = Label(root, text=bars_code1, border=0, background="#3A3A3A",
+                        bar_code_label = Label(root, text=bars_code1, border=0, background="#252525",
                                                font=("Andalus", 35), fg="white")
                         bar_code_label.place(x=510, y=415)
 
-                        how_many_sold_label = Label(root, text=how_many_sold1, border=0, background="#3A3A3A",
+                        how_many_sold_label = Label(root, text=how_many_sold1, border=0, background="#252525",
                                                     font=("Andalus", 35), fg="white")
                         how_many_sold_label.place(x=610, y=475)
 
-                        how_many_left_label = Label(root, text=how_many_left1, border=0, background="#3A3A3A",
+                        how_many_left_label = Label(root, text=how_many_left1, border=0, background="#252525",
                                                     font=("Andalus", 35), fg="white")
                         how_many_left_label.place(x=610, y=535)
 
                         saving_file = f"Book name : {book_name1}\nAuthor : {author1}\nRelease date : {release_date1}\nBar-code : {barss_code}\nHow many sold : {how_many_sold1}\nHow many left : {how_many_left1}"
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\greenreturntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("greenreturntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
-                                                              bg="#3A3A3A", width=250, height=200,
-                                                              activebackground="#3A3A3A", border=0, command=main_menu)
+                                                              bg="#252525", width=250, height=200,
+                                                              activebackground="#252525", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=1080, y=260)
 
-                        save_as_txt_btn = PhotoImage(file="assets\\saveastxt_button.png")
+                        save_as_txt_btn = PhotoImage(file=resource_path("saveastxt_button.png"))
                         save_as_txt_btn_label = Label(image=save_as_txt_btn)
 
-                        real_save_as_txt_btn = Button(root, text="Start", image=save_as_txt_btn, bg="#3A3A3A",
-                                                      width=280, height=220, activebackground="#3A3A3A", border=0,
+                        real_save_as_txt_btn = Button(root, text="Start", image=save_as_txt_btn, bg="#252525",
+                                                      width=280, height=220, activebackground="#252525", border=0,
                                                       command=save_as_txt_file)
                         real_save_as_txt_btn.place(x=1075, y=480)
 
@@ -325,11 +337,11 @@ def main_menu():
                     else:
                         global bg66
 
-                        bg66 = PhotoImage(file="assets\\sorryitseemsthatthisbookdoesntexistsinyourlibrary.png")
+                        bg66 = PhotoImage(file=resource_path("sorryitseemsthatthisbookdoesntexistsinyourlibrary.png"))
                         bg66_label = Label(root, image=bg66)
                         bg66_label.place(x=0, y=0)
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -337,25 +349,25 @@ def main_menu():
                                                               activebackground="black", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=850, y=585)
 
-                        back_btn = PhotoImage(file="assets\\back_button.png")
+                        back_btn = PhotoImage(file=resource_path("back_button.png"))
                         back_btn_label = Label(image=back_btn)
 
                         real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
                                                activebackground="black", border=0, command=search_by_bar_code)
                         real_back_btn.place(x=400, y=585)
 
-            bg63 = PhotoImage(file="assets\\searchbybarcode_screen.png")
+            bg63 = PhotoImage(file=resource_path("searchbybarcode_screen.png"))
             bg63_label = Label(root, image=bg63)
             bg63_label.place(x=0, y=0)
 
-            submit_btn = PhotoImage(file="assets\\submit_button.png")
+            submit_btn = PhotoImage(file=resource_path("submit_button.png"))
             submit_btn_label = Label(image=submit_btn)
 
             real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#272727", width=250, height=200,
                                      activebackground="#272727", border=0, command=submit)
             real_submit_btn.place(x=845, y=585)
 
-            back_btn = PhotoImage(file="assets\\back_button.png")
+            back_btn = PhotoImage(file=resource_path("back_button.png"))
             back_btn_label = Label(image=back_btn)
 
             real_back_btn = Button(root, text="Start", image=back_btn, bg="#272727", width=250, height=200,
@@ -365,25 +377,25 @@ def main_menu():
             barss_code_entry = Entry(root, border=0, background="#3C3C3C", fg="red", font=("Andalus", 24))
             barss_code_entry.place(x=890, y=410, width=95, height=33)
 
-        b61 = PhotoImage(file="assets\\searchmethods_screen.png")
+        b61 = PhotoImage(file=resource_path("searchmethods_screen.png"))
         b61_label = Label(root, image=b61)
         b61_label.place(x=0, y=0)
 
-        back_btn = PhotoImage(file="assets\\back_button.png")
+        back_btn = PhotoImage(file=resource_path("back_button.png"))
         back_btn_label = Label(image=back_btn)
 
         real_back_btn = Button(root, text="Start", image=back_btn, bg="#00FFE0", width=270, height=220,
                                activebackground="#00FFE0", border=0, command=main_menu)
         real_back_btn.place(x=655, y=575)
 
-        search_by_name_btn = PhotoImage(file="assets\\searchbyname_button.png")
+        search_by_name_btn = PhotoImage(file=resource_path("searchbyname_button.png"))
         search_by_name_btn_label = Label(image=search_by_name_btn)
 
         real_search_by_name_btn = Button(root, text="Start", image=search_by_name_btn, bg="#242C2B", width=250,
                                          height=220, activebackground="#242C2B", border=0, command=search_by_name)
         real_search_by_name_btn.place(x=1150, y=375)
 
-        search_by_bar_code_btn = PhotoImage(file="assets\\searchbybarcode_button.png")
+        search_by_bar_code_btn = PhotoImage(file=resource_path("searchbybarcode_button.png"))
         search_by_bar_code_btn_label = Label(image=search_by_bar_code_btn)
 
         real_search_by_bar_code_btn = Button(root, text="Start", image=search_by_bar_code_btn, bg="#00FFE0", width=270,
@@ -397,15 +409,15 @@ def main_menu():
         global back_btn
         global submit_btn
 
-        bg2 = PhotoImage(file="assets\\newbookdataget_srcreen.png")
+        bg2 = PhotoImage(file=resource_path("newbookdataget_srcreen.png"))
         bg2_label = Label(root, image=bg2)
         bg2_label.place(x=0, y=0)
 
-        back_btn = PhotoImage(file="assets\\back_button.png")
+        back_btn = PhotoImage(file=resource_path("back_button.png"))
         back_btn_label = Label(image=back_btn)
 
-        real_back_btn = Button(root, text="Start", image=back_btn, bg="#3A3A3A", width=250, height=200,
-                               activebackground="#3A3A3A", border=0, command=main_menu)
+        real_back_btn = Button(root, text="Start", image=back_btn, bg="#252525", width=250, height=200,
+                               activebackground="#252525", border=0, command=main_menu)
         real_back_btn.place(x=465, y=575)
 
         def submit():
@@ -448,11 +460,11 @@ def main_menu():
                 global back_btn
 
                 global bg4
-                bg4 = PhotoImage(file="assets\\cannotassignanemptynewbookname.png")
+                bg4 = PhotoImage(file=resource_path("cannotassignanemptynewbookname.png"))
                 bg4_label = Label(root, image=bg4)
                 bg4_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -460,7 +472,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -471,11 +483,11 @@ def main_menu():
             elif new_author == "":
 
                 global bg5
-                bg5 = PhotoImage(file="assets\\cannotassignanemptynewauthorname.png")
+                bg5 = PhotoImage(file=resource_path("cannotassignanemptynewauthorname.png"))
                 bg5_label = Label(root, image=bg5)
                 bg5_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -483,7 +495,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -494,11 +506,11 @@ def main_menu():
             elif new_release_date == "":
 
                 global bg6
-                bg6 = PhotoImage(file="assets\\cannotassignanemptynewreleasedate.png")
+                bg6 = PhotoImage(file=resource_path("cannotassignanemptynewreleasedate.png"))
                 bg6_label = Label(root, image=bg6)
                 bg6_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -506,7 +518,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -517,11 +529,11 @@ def main_menu():
             elif new_bar_code == "":
 
                 global bg7
-                bg7 = PhotoImage(file="assets\\cannotassignanemptynewbarcode.png")
+                bg7 = PhotoImage(file=resource_path("cannotassignanemptynewbarcode.png"))
                 bg7_label = Label(root, image=bg7)
                 bg7_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -529,7 +541,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -540,11 +552,11 @@ def main_menu():
             elif new_how_many_sold == "":
 
                 global bg8
-                bg8 = PhotoImage(file="assets\\cannotassignanemptynewhowmanysold.png")
+                bg8 = PhotoImage(file=resource_path("cannotassignanemptynewhowmanysold.png"))
                 bg8_label = Label(root, image=bg8)
                 bg8_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -552,7 +564,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -563,11 +575,11 @@ def main_menu():
             elif new_how_many_left == "":
 
                 global bg9
-                bg9 = PhotoImage(file="assets\\cannotassignanemptynewrhowmanyleft.png")
+                bg9 = PhotoImage(file=resource_path("cannotassignanemptynewrhowmanyleft.png"))
                 bg9_label = Label(root, image=bg9)
                 bg9_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -575,7 +587,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -585,11 +597,11 @@ def main_menu():
 
             elif str(new_bar_code) in final_all_bar_codes:
                 global bg13
-                bg13 = PhotoImage(file="assets\\sorryitseemsthatthisbookalreadyexistsindatabase.png")
+                bg13 = PhotoImage(file=resource_path("sorryitseemsthatthisbookalreadyexistsindatabase.png"))
                 bg13_label = Label(root, image=bg13)
                 bg13_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -597,7 +609,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -608,11 +620,11 @@ def main_menu():
 
             elif not new_release_date.isdigit():
                 global bg16
-                bg16 = PhotoImage(file="assets\\yourreleasedatecontainsacharactorwhichisnotnumeric.png")
+                bg16 = PhotoImage(file=resource_path("yourreleasedatecontainsacharactorwhichisnotnumeric.png"))
                 bg16_label = Label(root, image=bg16)
                 bg16_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -620,7 +632,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -630,11 +642,11 @@ def main_menu():
 
             elif not new_bar_code.isdigit():
                 global bg17
-                bg17 = PhotoImage(file="assets\\yourbarcodecontainsacharactorwhichisnotnumeric.png")
+                bg17 = PhotoImage(file=resource_path("yourbarcodecontainsacharactorwhichisnotnumeric.png"))
                 bg17_label = Label(root, image=bg17)
                 bg17_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -642,7 +654,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -652,11 +664,11 @@ def main_menu():
 
             elif (len(new_release_date)) != 4:
                 global bg11
-                bg11 = PhotoImage(file="assets\\thereleasedatemusthaveexactly4numbers.png")
+                bg11 = PhotoImage(file=resource_path("thereleasedatemusthaveexactly4numbers.png"))
                 bg11_label = Label(root, image=bg11)
                 bg11_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -664,7 +676,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -674,11 +686,11 @@ def main_menu():
 
             elif len(new_bar_code) != 5:
                 global bg12
-                bg12 = PhotoImage(file="assets\\thebarcodemusthaveexactly5numbers.png")
+                bg12 = PhotoImage(file=resource_path("thebarcodemusthaveexactly5numbers.png"))
                 bg12_label = Label(root, image=bg12)
                 bg12_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -686,7 +698,7 @@ def main_menu():
                                                       command=main_menu)
                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                back_btn = PhotoImage(file="assets\\back_button.png")
+                back_btn = PhotoImage(file=resource_path("back_button.png"))
                 back_btn_label = Label(image=back_btn)
 
                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -703,16 +715,16 @@ def main_menu():
                 # final_all_bar_codes.append(str(new_bar_code))
 
                 df = DataFrame.from_dict(all_rows)
-                df.to_excel("database\\LibraryDataBase.xlsx")
+                df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
                 del temporary_dict
 
                 global bg14
-                bg14 = PhotoImage(file="assets\\addedsuccesfully.png")
+                bg14 = PhotoImage(file=resource_path("addedsuccesfully.png"))
                 bg14_label = Label(root, image=bg14)
                 bg14_label.place(x=0, y=0)
 
-                return_to_main_menu_btn = PhotoImage(file="assets\\greenreturntomainmenu_button.png")
+                return_to_main_menu_btn = PhotoImage(file=resource_path("greenreturntomainmenu_button.png"))
                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -738,11 +750,11 @@ def main_menu():
         how_many_left_entry = Entry(root, border=0, background="#171717", fg="red", font=("Andalus", 24))
         how_many_left_entry.place(x=730, y=500, width=490, height=30)
 
-        submit_btn = PhotoImage(file="assets\\submit_button.png")
+        submit_btn = PhotoImage(file=resource_path("submit_button.png"))
         submit_btn_label = Label(image=submit_btn)
 
-        real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#3A3A3A", width=250, height=200,
-                                 activebackground="#3A3A3A", border=0, command=submit)
+        real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#252525", width=250, height=200,
+                                 activebackground="#252525", border=0, command=submit)
         real_submit_btn.place(x=800, y=575)
 
     def delete_book():
@@ -755,11 +767,11 @@ def main_menu():
                     global bg25
                     global return_to_main_menu_btn
 
-                    bg25 = PhotoImage(file="assets\\deletedsuccesfully.png")
+                    bg25 = PhotoImage(file=resource_path("deletedsuccesfully.png"))
                     bg25_label = Label(root, image=bg25)
                     bg25_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -773,7 +785,7 @@ def main_menu():
                             break
 
                     df = DataFrame.from_dict(all_rows)
-                    df.to_excel("database\\LibraryDataBase.xlsx")
+                    df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
                 global bg24
                 global bg26
@@ -784,11 +796,11 @@ def main_menu():
                 book_to_be_removed = book_name_entry.get()
 
                 if book_to_be_removed == "":
-                    bg35 = PhotoImage(file="assets\\cannotleavethebooknameinputblank.png")
+                    bg35 = PhotoImage(file=resource_path("cannotleavethebooknameinputblank.png"))
                     bg35_label = Label(root, image=bg35)
                     bg35_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -796,7 +808,7 @@ def main_menu():
                                                           command=main_menu)
                     real_return_to_main_menu_btn.place(x=850, y=585)
 
-                    back_btn = PhotoImage(file="assets\\back_button.png")
+                    back_btn = PhotoImage(file=resource_path("back_button.png"))
                     back_btn_label = Label(image=back_btn)
 
                     real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -814,7 +826,7 @@ def main_menu():
                     if book_to_be_removed in temp_list:
 
                         bg24 = PhotoImage(
-                            file="assets\\youareabottodeleteabookandallofitsdatafromyourlibraryareyousure.png")
+                            file=resource_path("youareabottodeleteabookandallofitsdatafromyourlibraryareyousure.png"))
                         bg24_label = Label(root, image=bg24)
                         bg24_label.place(x=0, y=0)
 
@@ -828,11 +840,11 @@ def main_menu():
                         real_nope_btn.place(x=410, y=637, width=155, height=90)
 
                     else:
-                        bg26 = PhotoImage(file="assets\\sorryitseemsthatthisbookdoesntexistsinyourlibrary.png")
+                        bg26 = PhotoImage(file=resource_path("sorryitseemsthatthisbookdoesntexistsinyourlibrary.png"))
                         bg26_label = Label(root, image=bg26)
                         bg26_label.place(x=0, y=0)
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -840,7 +852,7 @@ def main_menu():
                                                               activebackground="black", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=850, y=585)
 
-                        back_btn = PhotoImage(file="assets\\back_button.png")
+                        back_btn = PhotoImage(file=resource_path("back_button.png"))
                         back_btn_label = Label(image=back_btn)
 
                         real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -851,18 +863,18 @@ def main_menu():
             global submit_btn
             global back_btn
 
-            bg20 = PhotoImage(file="assets\\booknamedelete_screen.png")
+            bg20 = PhotoImage(file=resource_path("booknamedelete_screen.png"))
             bg20_label = Label(root, image=bg20)
             bg20_label.place(x=0, y=0)
 
-            submit_btn = PhotoImage(file="assets\\submit_button.png")
+            submit_btn = PhotoImage(file=resource_path("submit_button.png"))
             submit_btn_label = Label(image=submit_btn)
 
             real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#272727", width=250, height=200,
                                      activebackground="#272727", border=0, command=submit)
             real_submit_btn.place(x=845, y=585)
 
-            back_btn = PhotoImage(file="assets\\back_button.png")
+            back_btn = PhotoImage(file=resource_path("back_button.png"))
             back_btn_label = Label(image=back_btn)
 
             real_back_btn = Button(root, text="Start", image=back_btn, bg="#272727", width=250, height=200,
@@ -885,11 +897,11 @@ def main_menu():
                     global bg25
                     global return_to_main_menu_btn
 
-                    bg25 = PhotoImage(file="assets\\deletedsuccesfully.png")
+                    bg25 = PhotoImage(file=resource_path("deletedsuccesfully.png"))
                     bg25_label = Label(root, image=bg25)
                     bg25_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -903,16 +915,16 @@ def main_menu():
                             break
 
                     df = DataFrame.from_dict(all_rows)
-                    df.to_excel("database\\LibraryDataBase.xlsx")
+                    df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
                 bar_code_to_be_removed = bar_codee_entry.get()
 
                 if bar_code_to_be_removed == "":
-                    bg33 = PhotoImage(file="assets\\cannotleavethebarcodeinputblank.png")
+                    bg33 = PhotoImage(file=resource_path("cannotleavethebarcodeinputblank.png"))
                     bg33_label = Label(root, image=bg33)
                     bg33_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -920,7 +932,7 @@ def main_menu():
                                                           command=main_menu)
                     real_return_to_main_menu_btn.place(x=850, y=585)
 
-                    back_btn = PhotoImage(file="assets\\back_button.png")
+                    back_btn = PhotoImage(file=resource_path("back_button.png"))
                     back_btn_label = Label(image=back_btn)
 
                     real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -937,7 +949,7 @@ def main_menu():
                     if bar_code_to_be_removed in temp_list:
 
                         bg31 = PhotoImage(
-                            file="assets\\youareabottodeleteabookandallofitsdatafromyourlibraryareyousure.png")
+                            file=resource_path("youareabottodeleteabookandallofitsdatafromyourlibraryareyousure.png"))
                         bg31_label = Label(root, image=bg31)
                         bg31_label.place(x=0, y=0)
 
@@ -953,11 +965,11 @@ def main_menu():
 
                     else:
 
-                        bg32 = PhotoImage(file="assets\\sorryitseemsthatthisbookdoesntexistsinyourlibrary.png")
+                        bg32 = PhotoImage(file=resource_path("sorryitseemsthatthisbookdoesntexistsinyourlibrary.png"))
                         bg32_label = Label(root, image=bg32)
                         bg32_label.place(x=0, y=0)
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -965,7 +977,7 @@ def main_menu():
                                                               activebackground="black", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=850, y=585)
 
-                        back_btn = PhotoImage(file="assets\\back_button.png")
+                        back_btn = PhotoImage(file=resource_path("back_button.png"))
                         back_btn_label = Label(image=back_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -977,18 +989,18 @@ def main_menu():
             global submit_btn
             global back_btn
 
-            bg30 = PhotoImage(file="assets\\barcodedelete_screen.png")
+            bg30 = PhotoImage(file=resource_path("barcodedelete_screen.png"))
             bg30_label = Label(root, image=bg30)
             bg30_label.place(x=0, y=0)
 
-            submit_btn = PhotoImage(file="assets\\submit_button.png")
+            submit_btn = PhotoImage(file=resource_path("submit_button.png"))
             submit_btn_label = Label(image=submit_btn)
 
             real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#272727", width=250, height=200,
                                      activebackground="#272727", border=0, command=submit)
             real_submit_btn.place(x=845, y=585)
 
-            back_btn = PhotoImage(file="assets\\back_button.png")
+            back_btn = PhotoImage(file=resource_path("back_button.png"))
             back_btn_label = Label(image=back_btn)
 
             real_back_btn = Button(root, text="Start", image=back_btn, bg="#272727", width=250, height=200,
@@ -1003,25 +1015,25 @@ def main_menu():
         global delete_by_name_btn
         global delete_by_bar_code_btn
 
-        bg2 = PhotoImage(file="assets\\deletebookmethod.png")
+        bg2 = PhotoImage(file=resource_path("deletebookmethod.png"))
         bg2_label = Label(root, image=bg2)
         bg2_label.place(x=0, y=0)
 
-        back_btn = PhotoImage(file="assets\\back_button.png")
+        back_btn = PhotoImage(file=resource_path("back_button.png"))
         back_btn_label = Label(image=back_btn)
 
         real_back_btn = Button(root, text="Start", image=back_btn, bg="#893434", width=250, height=200,
                                activebackground="#893434", border=0, command=main_menu)
         real_back_btn.place(x=660, y=575)
 
-        delete_by_name_btn = PhotoImage(file="assets\\deletebyname_button.png")
+        delete_by_name_btn = PhotoImage(file=resource_path("deletebyname_button.png"))
         delete_by_name_btn_label = Label(image=delete_by_name_btn)
 
         real_delete_by_name_btn = Button(root, text="Start", image=delete_by_name_btn, bg="black", width=250,
                                          height=220, activebackground="black", border=0, command=delete_by_name)
         real_delete_by_name_btn.place(x=1150, y=375)
 
-        delete_by_bar_code_btn = PhotoImage(file="assets\\deletebybarcode_button.png")
+        delete_by_bar_code_btn = PhotoImage(file=resource_path("deletebybarcode_button.png"))
         delete_by_bar_code_btn_label = Label(image=delete_by_bar_code_btn)
 
         real_submit_btn = Button(root, text="Start", image=delete_by_bar_code_btn, bg="#893434", width=250, height=220,
@@ -1039,11 +1051,11 @@ def main_menu():
         global return_to_main_menu_btn
         global copy_to_clipboard_btn
 
-        bg1 = PhotoImage(file="assets\\barcodegenerator.png")
+        bg1 = PhotoImage(file=resource_path("barcodegenerator.png"))
         bg1_label = Label(root, image=bg1)
         bg1_label.place(x=0, y=0)
 
-        return_to_main_menu_btn = PhotoImage(file="assets\\greenreturntomainmenu_button.png")
+        return_to_main_menu_btn = PhotoImage(file=resource_path("greenreturntomainmenu_button.png"))
         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="#6B3A00",
@@ -1051,7 +1063,7 @@ def main_menu():
                                               command=main_menu)
         real_return_to_main_menu_btn.place(x=920, y=288)
 
-        copy_to_clipboard_btn = PhotoImage(file="assets\\copytoclipboard_button.png")
+        copy_to_clipboard_btn = PhotoImage(file=resource_path("copytoclipboard_button.png"))
         copy_to_clipboard_btn_label = Label(image=copy_to_clipboard_btn)
 
         real_copy_to_clipboard_btn = Button(root, text="Start", image=copy_to_clipboard_btn, bg="#6B3A00", width=250,
@@ -1086,11 +1098,11 @@ def main_menu():
                 book = book_name_entry.get()
 
                 if book == "":
-                    bg41 = PhotoImage(file="assets\\cannotleavethebooknameinputblank.png")
+                    bg41 = PhotoImage(file=resource_path("cannotleavethebooknameinputblank.png"))
                     bg41_label = Label(root, image=bg41)
                     bg41_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -1098,7 +1110,7 @@ def main_menu():
                                                           command=main_menu)
                     real_return_to_main_menu_btn.place(x=850, y=585)
 
-                    back_btn = PhotoImage(file="assets\\back_button.png")
+                    back_btn = PhotoImage(file=resource_path("back_button.png"))
                     back_btn_label = Label(image=back_btn)
 
                     real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -1146,11 +1158,11 @@ def main_menu():
                                 global back_btn
 
                                 global bg4
-                                bg4 = PhotoImage(file="assets\\cannotassignanemptynewbookname.png")
+                                bg4 = PhotoImage(file=resource_path("cannotassignanemptynewbookname.png"))
                                 bg4_label = Label(root, image=bg4)
                                 bg4_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1159,7 +1171,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1170,11 +1182,11 @@ def main_menu():
                             elif new_author == "":
 
                                 global bg5
-                                bg5 = PhotoImage(file="assets\\cannotassignanemptynewauthorname.png")
+                                bg5 = PhotoImage(file=resource_path("cannotassignanemptynewauthorname.png"))
                                 bg5_label = Label(root, image=bg5)
                                 bg5_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1183,7 +1195,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1194,11 +1206,11 @@ def main_menu():
                             elif new_release_date == "":
 
                                 global bg6
-                                bg6 = PhotoImage(file="assets\\cannotassignanemptynewreleasedate.png")
+                                bg6 = PhotoImage(file=resource_path("cannotassignanemptynewreleasedate.png"))
                                 bg6_label = Label(root, image=bg6)
                                 bg6_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1207,7 +1219,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1218,11 +1230,11 @@ def main_menu():
                             elif new_bar_code == "":
 
                                 global bg7
-                                bg7 = PhotoImage(file="assets\\cannotassignanemptynewbarcode.png")
+                                bg7 = PhotoImage(file=resource_path("cannotassignanemptynewbarcode.png"))
                                 bg7_label = Label(root, image=bg7)
                                 bg7_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1231,7 +1243,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1242,11 +1254,11 @@ def main_menu():
                             elif new_how_many_sold == "":
 
                                 global bg8
-                                bg8 = PhotoImage(file="assets\\cannotassignanemptynewhowmanysold.png")
+                                bg8 = PhotoImage(file=resource_path("cannotassignanemptynewhowmanysold.png"))
                                 bg8_label = Label(root, image=bg8)
                                 bg8_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1255,7 +1267,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1266,11 +1278,11 @@ def main_menu():
                             elif new_how_many_left == "":
 
                                 global bg9
-                                bg9 = PhotoImage(file="assets\\cannotassignanemptynewrhowmanyleft.png")
+                                bg9 = PhotoImage(file=resource_path("cannotassignanemptynewrhowmanyleft.png"))
                                 bg9_label = Label(root, image=bg9)
                                 bg9_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1279,7 +1291,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1289,11 +1301,11 @@ def main_menu():
 
                             elif str(new_bar_code) in final_all_bar_codes:
                                 global bg13
-                                bg13 = PhotoImage(file="assets\\sorryitseemsthatthisbookalreadyexistsindatabase.png")
+                                bg13 = PhotoImage(file=resource_path("sorryitseemsthatthisbookalreadyexistsindatabase.png"))
                                 bg13_label = Label(root, image=bg13)
                                 bg13_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1302,7 +1314,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1312,11 +1324,11 @@ def main_menu():
 
                             elif not new_release_date.isdigit():
                                 global bg16
-                                bg16 = PhotoImage(file="assets\\yourreleasedatecontainsacharactorwhichisnotnumeric.png")
+                                bg16 = PhotoImage(file=resource_path("yourreleasedatecontainsacharactorwhichisnotnumeric.png"))
                                 bg16_label = Label(root, image=bg16)
                                 bg16_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1325,7 +1337,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1335,11 +1347,11 @@ def main_menu():
 
                             elif not new_bar_code.isdigit():
                                 global bg17
-                                bg17 = PhotoImage(file="assets\\yourbarcodecontainsacharactorwhichisnotnumeric.png")
+                                bg17 = PhotoImage(file=resource_path("yourbarcodecontainsacharactorwhichisnotnumeric.png"))
                                 bg17_label = Label(root, image=bg17)
                                 bg17_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1348,7 +1360,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1358,11 +1370,11 @@ def main_menu():
 
                             elif (len(new_release_date)) != 4:
                                 global bg11
-                                bg11 = PhotoImage(file="assets\\thereleasedatemusthaveexactly4numbers.png")
+                                bg11 = PhotoImage(file=resource_path("thereleasedatemusthaveexactly4numbers.png"))
                                 bg11_label = Label(root, image=bg11)
                                 bg11_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1371,7 +1383,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1381,11 +1393,11 @@ def main_menu():
 
                             elif len(new_bar_code) != 5:
                                 global bg12
-                                bg12 = PhotoImage(file="assets\\thebarcodemusthaveexactly5numbers.png")
+                                bg12 = PhotoImage(file=resource_path("thebarcodemusthaveexactly5numbers.png"))
                                 bg12_label = Label(root, image=bg12)
                                 bg12_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1394,7 +1406,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1405,12 +1417,12 @@ def main_menu():
                             else:
                                 for _ in all_rows:
                                     if _["book_name"] == book:
-                                        bg43 = PhotoImage(file="assets\\editedsuccesfully_screen.png")
+                                        bg43 = PhotoImage(file=resource_path("editedsuccesfully_screen.png"))
                                         bg43label = Label(root, image=bg43)
                                         bg43label.place(x=0, y=0)
 
                                         return_to_main_menu_btn = PhotoImage(
-                                            file="assets\\greenreturntomainmenu_button.png")
+                                            file=resource_path("greenreturntomainmenu_button.png"))
                                         return_to_main_menu_btn_label = Label(image=back_btn)
 
                                         real_return_to_main_menu_btn = Button(root, text="Start",
@@ -1424,9 +1436,9 @@ def main_menu():
                                         all_rows.append(temp_dict)
 
                                 df = DataFrame.from_dict(all_rows)
-                                df.to_excel("database\\LibraryDataBase.xlsx")
+                                df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
-                        bg42 = PhotoImage(file="assets\\newbookdataget_srcreen.png")
+                        bg42 = PhotoImage(file=resource_path("newbookdataget_srcreen.png"))
                         bg42label = Label(root, image=bg42)
                         bg42label.place(x=0, y=0)
 
@@ -1451,29 +1463,29 @@ def main_menu():
                                                      font=("Andalus", 24))
                         how_manys_left_entry.place(x=730, y=500, width=490, height=30)
 
-                        submit2_btn = PhotoImage(file="assets\\submit_button.png")
+                        submit2_btn = PhotoImage(file=resource_path("submit_button.png"))
                         submit2_btn_label = Label(image=submit2_btn)
 
-                        real_submit2_btn = Button(root, text="Start", image=submit2_btn, bg="#3A3A3A", width=250,
-                                                  height=200, activebackground="#3A3A3A", border=0, command=submit2)
+                        real_submit2_btn = Button(root, text="Start", image=submit2_btn, bg="#252525", width=250,
+                                                  height=200, activebackground="#252525", border=0, command=submit2)
                         real_submit2_btn.place(x=800, y=575)
 
-                        back_btn = PhotoImage(file="assets\\back_button.png")
+                        back_btn = PhotoImage(file=resource_path("back_button.png"))
                         back_btn_label = Label(image=back_btn)
 
-                        real_back_btn = Button(root, text="Start", image=back_btn, bg="#3A3A3A", width=250, height=200,
-                                               activebackground="#3A3A3A", border=0, command=edit_by_book_name)
+                        real_back_btn = Button(root, text="Start", image=back_btn, bg="#252525", width=250, height=200,
+                                               activebackground="#252525", border=0, command=edit_by_book_name)
                         real_back_btn.place(x=465, y=575)
 
 
                     else:
                         global bg34
 
-                        bg34 = PhotoImage(file="assets\\sorryitseemsthatthisbookdoesntexistsinyourlibrary.png")
+                        bg34 = PhotoImage(file=resource_path("sorryitseemsthatthisbookdoesntexistsinyourlibrary.png"))
                         bg34_label = Label(root, image=bg34)
                         bg34_label.place(x=0, y=0)
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1481,18 +1493,18 @@ def main_menu():
                                                               activebackground="black", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=635, y=585)
 
-            bg38 = PhotoImage(file="assets\\booknameedit_screen.png")
+            bg38 = PhotoImage(file=resource_path("booknameedit_screen.png"))
             bg38_label = Label(root, image=bg38)
             bg38_label.place(x=0, y=0)
 
-            submit_btn = PhotoImage(file="assets\\submit_button.png")
+            submit_btn = PhotoImage(file=resource_path("submit_button.png"))
             submit_btn_label = Label(image=submit_btn)
 
             real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#272727", width=250, height=200,
                                      activebackground="#272727", border=0, command=submit)
             real_submit_btn.place(x=845, y=585)
 
-            back_btn = PhotoImage(file="assets\\back_button.png")
+            back_btn = PhotoImage(file=resource_path("back_button.png"))
             back_btn_label = Label(image=back_btn)
 
             real_back_btn = Button(root, text="Start", image=back_btn, bg="#272727", width=250, height=200,
@@ -1516,11 +1528,11 @@ def main_menu():
                 bar_code = bar_code_entry.get()
 
                 if bar_code == "":
-                    bg41 = PhotoImage(file="assets\\cannotleavethebooknameinputblank.png")
+                    bg41 = PhotoImage(file=resource_path("cannotleavethebooknameinputblank.png"))
                     bg41_label = Label(root, image=bg41)
                     bg41_label.place(x=0, y=0)
 
-                    return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                    return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                     return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                     real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="black",
@@ -1528,7 +1540,7 @@ def main_menu():
                                                           command=main_menu)
                     real_return_to_main_menu_btn.place(x=850, y=585)
 
-                    back_btn = PhotoImage(file="assets\\back_button.png")
+                    back_btn = PhotoImage(file=resource_path("back_button.png"))
                     back_btn_label = Label(image=back_btn)
 
                     real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
@@ -1576,11 +1588,11 @@ def main_menu():
                                 global back_btn
 
                                 global bg4
-                                bg4 = PhotoImage(file="assets\\cannotassignanemptynewbookname.png")
+                                bg4 = PhotoImage(file=resource_path("cannotassignanemptynewbookname.png"))
                                 bg4_label = Label(root, image=bg4)
                                 bg4_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1589,7 +1601,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1600,11 +1612,11 @@ def main_menu():
                             elif new_author == "":
 
                                 global bg5
-                                bg5 = PhotoImage(file="assets\\cannotassignanemptynewauthorname.png")
+                                bg5 = PhotoImage(file=resource_path("cannotassignanemptynewauthorname.png"))
                                 bg5_label = Label(root, image=bg5)
                                 bg5_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1613,7 +1625,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1624,11 +1636,11 @@ def main_menu():
                             elif new_release_date == "":
 
                                 global bg6
-                                bg6 = PhotoImage(file="assets\\cannotassignanemptynewreleasedate.png")
+                                bg6 = PhotoImage(file=resource_path("cannotassignanemptynewreleasedate.png"))
                                 bg6_label = Label(root, image=bg6)
                                 bg6_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1637,7 +1649,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1648,11 +1660,11 @@ def main_menu():
                             elif new_bar_code == "":
 
                                 global bg7
-                                bg7 = PhotoImage(file="assets\\cannotassignanemptynewbarcode.png")
+                                bg7 = PhotoImage(file=resource_path("cannotassignanemptynewbarcode.png"))
                                 bg7_label = Label(root, image=bg7)
                                 bg7_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1661,7 +1673,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1672,11 +1684,11 @@ def main_menu():
                             elif new_how_many_sold == "":
 
                                 global bg8
-                                bg8 = PhotoImage(file="assets\\cannotassignanemptynewhowmanysold.png")
+                                bg8 = PhotoImage(file=resource_path("cannotassignanemptynewhowmanysold.png"))
                                 bg8_label = Label(root, image=bg8)
                                 bg8_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1685,7 +1697,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1696,11 +1708,11 @@ def main_menu():
                             elif new_how_many_left == "":
 
                                 global bg9
-                                bg9 = PhotoImage(file="assets\\cannotassignanemptynewrhowmanyleft.png")
+                                bg9 = PhotoImage(file=resource_path("cannotassignanemptynewrhowmanyleft.png"))
                                 bg9_label = Label(root, image=bg9)
                                 bg9_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1709,7 +1721,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1719,11 +1731,11 @@ def main_menu():
 
                             elif str(new_bar_code) in final_all_bar_codes:
                                 global bg13
-                                bg13 = PhotoImage(file="assets\\sorryitseemsthatthisbookalreadyexistsindatabase.png")
+                                bg13 = PhotoImage(file=resource_path("sorryitseemsthatthisbookalreadyexistsindatabase.png"))
                                 bg13_label = Label(root, image=bg13)
                                 bg13_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1732,7 +1744,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1742,11 +1754,11 @@ def main_menu():
 
                             elif not new_release_date.isdigit():
                                 global bg16
-                                bg16 = PhotoImage(file="assets\\yourreleasedatecontainsacharactorwhichisnotnumeric.png")
+                                bg16 = PhotoImage(file=resource_path("yourreleasedatecontainsacharactorwhichisnotnumeric.png"))
                                 bg16_label = Label(root, image=bg16)
                                 bg16_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1755,7 +1767,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1765,11 +1777,11 @@ def main_menu():
 
                             elif not new_bar_code.isdigit():
                                 global bg17
-                                bg17 = PhotoImage(file="assets\\yourbarcodecontainsacharactorwhichisnotnumeric.png")
+                                bg17 = PhotoImage(file=resource_path("yourbarcodecontainsacharactorwhichisnotnumeric.png"))
                                 bg17_label = Label(root, image=bg17)
                                 bg17_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1778,7 +1790,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1788,11 +1800,11 @@ def main_menu():
 
                             elif (len(new_release_date)) != 4:
                                 global bg11
-                                bg11 = PhotoImage(file="assets\\thereleasedatemusthaveexactly4numbers.png")
+                                bg11 = PhotoImage(file=resource_path("thereleasedatemusthaveexactly4numbers.png"))
                                 bg11_label = Label(root, image=bg11)
                                 bg11_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1801,7 +1813,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1811,11 +1823,11 @@ def main_menu():
 
                             elif len(new_bar_code) != 5:
                                 global bg12
-                                bg12 = PhotoImage(file="assets\\thebarcodemusthaveexactly5numbers.png")
+                                bg12 = PhotoImage(file=resource_path("thebarcodemusthaveexactly5numbers.png"))
                                 bg12_label = Label(root, image=bg12)
                                 bg12_label.place(x=0, y=0)
 
-                                return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                                return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                                 return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                                 real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1824,7 +1836,7 @@ def main_menu():
                                                                       command=main_menu)
                                 real_return_to_main_menu_btn.place(x=800, y=575)
 
-                                back_btn = PhotoImage(file="assets\\back_button.png")
+                                back_btn = PhotoImage(file=resource_path("back_button.png"))
                                 back_btn_label = Label(image=back_btn)
 
                                 real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250,
@@ -1836,12 +1848,12 @@ def main_menu():
                                 global bg60
                                 for _ in all_rows:
                                     if _["bar_code"] == bar_code:
-                                        bg60 = PhotoImage(file="assets\\editedsuccesfully_screen.png")
+                                        bg60 = PhotoImage(file=resource_path("editedsuccesfully_screen.png"))
                                         bg60label = Label(root, image=bg60)
                                         bg60label.place(x=0, y=0)
 
                                         return_to_main_menu_btn = PhotoImage(
-                                            file="assets\\greenreturntomainmenu_button.png")
+                                            file=resource_path("greenreturntomainmenu_button.png"))
                                         return_to_main_menu_btn_label = Label(image=back_btn)
 
                                         real_return_to_main_menu_btn = Button(root, text="Start",
@@ -1855,9 +1867,9 @@ def main_menu():
                                         all_rows.append(temp_dict)
 
                                         df = DataFrame.from_dict(all_rows)
-                                        df.to_excel("database\\LibraryDataBase.xlsx")
+                                        df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
-                        bg42 = PhotoImage(file="assets\\newbookdataget_srcreen.png")
+                        bg42 = PhotoImage(file=resource_path("newbookdataget_srcreen.png"))
                         bg42label = Label(root, image=bg42)
                         bg42label.place(x=0, y=0)
 
@@ -1882,29 +1894,29 @@ def main_menu():
                                                      font=("Andalus", 24))
                         how_manys_left_entry.place(x=730, y=500, width=490, height=30)
 
-                        submit2_btn = PhotoImage(file="assets\\submit_button.png")
+                        submit2_btn = PhotoImage(file=resource_path("submit_button.png"))
                         submit2_btn_label = Label(image=submit2_btn)
 
-                        real_submit2_btn = Button(root, text="Start", image=submit2_btn, bg="#3A3A3A", width=250,
-                                                  height=200, activebackground="#3A3A3A", border=0, command=submit2)
+                        real_submit2_btn = Button(root, text="Start", image=submit2_btn, bg="#252525", width=250,
+                                                  height=200, activebackground="#252525", border=0, command=submit2)
                         real_submit2_btn.place(x=800, y=575)
 
-                        back_btn = PhotoImage(file="assets\\back_button.png")
+                        back_btn = PhotoImage(file=resource_path("back_button.png"))
                         back_btn_label = Label(image=back_btn)
 
-                        real_back_btn = Button(root, text="Start", image=back_btn, bg="#3A3A3A", width=250, height=200,
-                                               activebackground="#3A3A3A", border=0, command=edit_by_book_name)
+                        real_back_btn = Button(root, text="Start", image=back_btn, bg="#252525", width=250, height=200,
+                                               activebackground="#252525", border=0, command=edit_by_book_name)
                         real_back_btn.place(x=465, y=575)
 
 
                     else:
                         global bg34
 
-                        bg34 = PhotoImage(file="assets\\sorryitseemsthatthisbookdoesntexistsinyourlibrary.png")
+                        bg34 = PhotoImage(file=resource_path("sorryitseemsthatthisbookdoesntexistsinyourlibrary.png"))
                         bg34_label = Label(root, image=bg34)
                         bg34_label.place(x=0, y=0)
 
-                        return_to_main_menu_btn = PhotoImage(file="assets\\returntomainmenu_button.png")
+                        return_to_main_menu_btn = PhotoImage(file=resource_path("returntomainmenu_button.png"))
                         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
                         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn,
@@ -1912,18 +1924,18 @@ def main_menu():
                                                               activebackground="black", border=0, command=main_menu)
                         real_return_to_main_menu_btn.place(x=635, y=585)
 
-            bg38 = PhotoImage(file="assets\\barcodedit_screen.png")
+            bg38 = PhotoImage(file=resource_path("barcodedit_screen.png"))
             bg38_label = Label(root, image=bg38)
             bg38_label.place(x=0, y=0)
 
-            submit_btn = PhotoImage(file="assets\\submit_button.png")
+            submit_btn = PhotoImage(file=resource_path("submit_button.png"))
             submit_btn_label = Label(image=submit_btn)
 
             real_submit_btn = Button(root, text="Start", image=submit_btn, bg="#272727", width=250, height=200,
                                      activebackground="#272727", border=0, command=submit)
             real_submit_btn.place(x=845, y=585)
 
-            back_btn = PhotoImage(file="assets\\back_button.png")
+            back_btn = PhotoImage(file=resource_path("back_button.png"))
             back_btn_label = Label(image=back_btn)
 
             real_back_btn = Button(root, text="Start", image=back_btn, bg="#272727", width=250, height=200,
@@ -1933,25 +1945,25 @@ def main_menu():
             bar_code_entry = Entry(root, border=0, background="#3C3C3C", fg="red", font=("Andalus", 24))
             bar_code_entry.place(x=890, y=410, width=95, height=33)
 
-        bg37 = PhotoImage(file="assets\\editbookmethod.png")
+        bg37 = PhotoImage(file=resource_path("editbookmethod.png"))
         bg37_label = Label(root, image=bg37)
         bg37_label.place(x=0, y=0)
 
-        back_btn = PhotoImage(file="assets\\back_button.png")
+        back_btn = PhotoImage(file=resource_path("back_button.png"))
         back_btn_label = Label(image=back_btn)
 
         real_back_btn = Button(root, text="Start", image=back_btn, bg="black", width=250, height=200,
                                activebackground="black", border=0, command=main_menu)
         real_back_btn.place(x=660, y=575)
 
-        edit_by_name_btn = PhotoImage(file="assets\\editbybookname_button.png")
+        edit_by_name_btn = PhotoImage(file=resource_path("editbybookname_button.png"))
         edit_by_name_btn_label = Label(image=edit_by_name_btn)
 
         real_edit_by_name_btn = Button(root, text="Start", image=edit_by_name_btn, bg="#893434", width=250, height=220,
                                        activebackground="#893434", border=0, command=edit_by_book_name)
         real_edit_by_name_btn.place(x=1150, y=375)
 
-        edit_by_bar_code_btn = PhotoImage(file="assets\\editbybarcode_button.png")
+        edit_by_bar_code_btn = PhotoImage(file=resource_path("editbybarcode_button.png"))
         edit_by_bar_code_btn_label = Label(image=edit_by_bar_code_btn)
 
         real_edit_by_bar_code_btn = Button(root, text="Start", image=edit_by_bar_code_btn, bg="black", width=250,
@@ -1992,7 +2004,7 @@ def main_menu():
         for bar_codes in all_rows:
             all_bar_codes.append(bar_codes["bar_code"])
 
-        bg67 = PhotoImage(file="assets\\allbooksandbarcodes_screen.png")
+        bg67 = PhotoImage(file=resource_path("allbooksandbarcodes_screen.png"))
         bg67_label = Label(root, image=bg67)
         bg67_label.place(x=0, y=0)
 
@@ -2026,7 +2038,7 @@ def main_menu():
         book_text.place(x=20, y=0)
         books_scroll_bar.config(command=book_text.yview)
 
-        save_as_txt_btn_bar_code = PhotoImage(file="assets\\silversaveastxt_button.png")
+        save_as_txt_btn_bar_code = PhotoImage(file=resource_path("silversaveastxt_button.png"))
         save_as_txt_btn_bar_code_label = Label(image=save_as_txt_btn_bar_code)
 
         real_save_as_txt_btn_bar_code = Button(root, text="Start", image=save_as_txt_btn_bar_code, bg="#785637",
@@ -2034,7 +2046,7 @@ def main_menu():
                                                command=save_as_txt_file_bar_code)
         real_save_as_txt_btn_bar_code.place(x=315, y=325)
 
-        save_as_txt_btn_book = PhotoImage(file="assets\\purplesaveastxt_button.png")
+        save_as_txt_btn_book = PhotoImage(file=resource_path("purplesaveastxt_button.png"))
         save_as_txt_btn_book_label = Label(image=save_as_txt_btn_book)
 
         real_save_as_txt_btn_book = Button(root, text="Start", image=save_as_txt_btn_book, bg="#785637", width=280,
@@ -2042,7 +2054,7 @@ def main_menu():
                                            command=save_as_txt_file_book)
         real_save_as_txt_btn_book.place(x=825, y=325, width=250, height=195)
 
-        return_to_main_menu_btn = PhotoImage(file="assets\\greenreturntomainmenu_button.png")
+        return_to_main_menu_btn = PhotoImage(file=resource_path("greenreturntomainmenu_button.png"))
         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
         real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="#000000",
@@ -2063,7 +2075,7 @@ def main_menu():
             file.write(saving_file)
             file.close()
 
-        bg34 = PhotoImage(file="assets\\latestupdate_screen.png")
+        bg34 = PhotoImage(file=resource_path("latestupdate_screen.png"))
         bg34_label = Label(root, image=bg34)
         bg34_label.place(x=0, y=0)
 
@@ -2080,40 +2092,40 @@ def main_menu():
 
         saving_file = f"Book name : {book_name}\nAuthor : {author}\nRelease date : {release_date}\nBar-code : {bar_code}\nHow many sold : {how_many_sold}\nHow many left : {how_many_left}"
 
-        book_name_label = Label(root, text=book_name, border=0, background="#3A3A3A", font=("Andalus", 35), fg="white")
+        book_name_label = Label(root, text=book_name, border=0, background="#252525", font=("Andalus", 35), fg="white")
         book_name_label.place(x=560, y=235)
 
-        author_label = Label(root, text=author, border=0, background="#3A3A3A", font=("Andalus", 35), fg="white")
+        author_label = Label(root, text=author, border=0, background="#252525", font=("Andalus", 35), fg="white")
         author_label.place(x=480, y=295)
 
-        release_date_label = Label(root, text=release_date, border=0, background="#3A3A3A", font=("Andalus", 35),
+        release_date_label = Label(root, text=release_date, border=0, background="#252525", font=("Andalus", 35),
                                    fg="white")
         release_date_label.place(x=550, y=355)
 
-        bar_code_label = Label(root, text=bar_code, border=0, background="#3A3A3A", font=("Andalus", 35), fg="white")
+        bar_code_label = Label(root, text=bar_code, border=0, background="#252525", font=("Andalus", 35), fg="white")
         bar_code_label.place(x=510, y=415)
 
-        how_many_sold_label = Label(root, text=how_many_sold, border=0, background="#3A3A3A", font=("Andalus", 35),
+        how_many_sold_label = Label(root, text=how_many_sold, border=0, background="#252525", font=("Andalus", 35),
                                     fg="white")
         how_many_sold_label.place(x=610, y=475)
 
-        how_many_left_label = Label(root, text=how_many_left, border=0, background="#3A3A3A", font=("Andalus", 35),
+        how_many_left_label = Label(root, text=how_many_left, border=0, background="#252525", font=("Andalus", 35),
                                     fg="white")
         how_many_left_label.place(x=610, y=535)
 
-        return_to_main_menu_btn = PhotoImage(file="assets\\greenreturntomainmenu_button.png")
+        return_to_main_menu_btn = PhotoImage(file=resource_path("greenreturntomainmenu_button.png"))
         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
-        real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="#3A3A3A",
-                                              width=250, height=200, activebackground="#3A3A3A", border=0,
+        real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="#252525",
+                                              width=250, height=200, activebackground="#252525", border=0,
                                               command=main_menu)
         real_return_to_main_menu_btn.place(x=1080, y=260)
 
-        save_as_txt_btn = PhotoImage(file="assets\\saveastxt_button.png")
+        save_as_txt_btn = PhotoImage(file=resource_path("saveastxt_button.png"))
         save_as_txt_btn_label = Label(image=save_as_txt_btn)
 
-        real_save_as_txt_btn = Button(root, text="Start", image=save_as_txt_btn, bg="#3A3A3A", width=280, height=220,
-                                      activebackground="#3A3A3A", border=0, command=save_as_txt_file)
+        real_save_as_txt_btn = Button(root, text="Start", image=save_as_txt_btn, bg="#252525", width=280, height=220,
+                                      activebackground="#252525", border=0, command=save_as_txt_file)
         real_save_as_txt_btn.place(x=1075, y=480)
 
     def book_counter():
@@ -2126,7 +2138,7 @@ def main_menu():
             pyperclip.copy(len(all_rows))
             spam = pyperclip.paste()
 
-        bg36 = PhotoImage(file="assets\\totalbookscount.png")
+        bg36 = PhotoImage(file=resource_path("totalbookscount.png"))
         bg36_label = Label(root, image=bg36)
         bg36_label.place(x=0, y=0)
 
@@ -2134,19 +2146,19 @@ def main_menu():
                                     fg="#000000")
         how_many_left_label.place(x=785, y=390)
 
-        return_to_main_menu_btn = PhotoImage(file="assets\\greenreturntomainmenu_button.png")
+        return_to_main_menu_btn = PhotoImage(file=resource_path("greenreturntomainmenu_button.png"))
         return_to_main_menu_btn_label = Label(image=return_to_main_menu_btn)
 
-        real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="#3A3A3A",
-                                              width=250, height=200, activebackground="#3A3A3A", border=0,
+        real_return_to_main_menu_btn = Button(root, text="Start", image=return_to_main_menu_btn, bg="#252525",
+                                              width=250, height=200, activebackground="#252525", border=0,
                                               command=main_menu)
         real_return_to_main_menu_btn.place(x=950, y=320)
 
-        copy_to_clipboard_btn = PhotoImage(file="assets\\copytoclipboard_button.png")
+        copy_to_clipboard_btn = PhotoImage(file=resource_path("copytoclipboard_button.png"))
         copy_to_clipboard_btn_label = Label(image=copy_to_clipboard_btn)
 
-        real_copy_to_clipboard_btn = Button(root, text="Start", image=copy_to_clipboard_btn, bg="#3A3A3A", width=250,
-                                            height=200, activebackground="#3A3A3A", border=0, command=copy_to_clipboard)
+        real_copy_to_clipboard_btn = Button(root, text="Start", image=copy_to_clipboard_btn, bg="#252525", width=250,
+                                            height=200, activebackground="#252525", border=0, command=copy_to_clipboard)
         real_copy_to_clipboard_btn.place(x=395, y=320)
 
     def exit():
@@ -2154,97 +2166,85 @@ def main_menu():
 
     """Back-End of buttons start here"""
 
-    bg = PhotoImage(file="assets\\bg.png")
+    bg = PhotoImage(file=resource_path("bg.png"))
     bg_label = Label(root, image=bg)
-    bg_label.place(x=0, y=0)
+    bg_label.place(x=-10, y=0)
 
     read_from_excel()
     update()
 
-    search_btn = PhotoImage(file="assets\\search_button.png")
+    search_btn = PhotoImage(file=resource_path("search_button.png"))
     search_label = Label(image=search_btn)
 
-    add_btn = PhotoImage(file="assets\\add_button.png")
+    add_btn = PhotoImage(file=resource_path("add_button.png"))
     add_label = Label(image=add_btn)
 
-    delete_btn = PhotoImage(file="assets\\delete_button.png")
+    delete_btn = PhotoImage(file=resource_path("delete_button.png"))
     delete_label = Label(image=delete_btn)
 
-    edit_btn = PhotoImage(file="assets\\edit_button.png")
+    edit_btn = PhotoImage(file=resource_path("edit_button.png"))
     edit_label = Label(image=edit_btn)
 
-    real_search_btn = Button(root, text="Start", image=search_btn, bg="#3A3A3A", activebackground="#3A3A3A", border=0,
+    real_search_btn = Button(root, text="Start", image=search_btn, bg="#252525", activebackground="#252525", border=0,
                              command=search_book)
-    real_search_btn.grid(row=0, column=0)
+    real_search_btn.place(x=10, y=110)
 
-    real_add_btn = Button(root, text="Start", image=add_btn, bg="#3A3A3A", activebackground="#3A3A3A", border=0,
+    real_add_btn = Button(root, text="Start", image=add_btn, bg="#252525", activebackground="#252525", border=0,
                           command=add_book)
-    real_add_btn.grid(row=1, column=0)
+    real_add_btn.place(x=10, y=210)
 
-    real_delete_btn = Button(root, text="Start", image=delete_btn, bg="#3A3A3A", activebackground="#3A3A3A", border=0,
+    real_delete_btn = Button(root, text="Start", image=delete_btn, bg="#252525", activebackground="#252525", border=0,
                              command=delete_book)
-    real_delete_btn.grid(row=2, column=0)
+    real_delete_btn.place(x=10, y=310)
 
-    real_edit_btn = Button(root, text="Start", image=edit_btn, bg="#3A3A3A", activebackground="#3A3A3A", border=0,
+    real_edit_btn = Button(root, text="Start", image=edit_btn, bg="#252525", activebackground="#252525", border=0,
                            command=edit_book)
-    real_edit_btn.grid(row=3, column=0)
+    real_edit_btn.place(x=10, y=410)
 
-    row1_image = PhotoImage(file="assets\\row_1_label.png")
-    row1_image_label = Label(root, image=row1_image)
-    row1_label = Label(root, image=row1_image, border=0)
-
-    allbooksandbarcodes_btn = PhotoImage(file="assets\\allbooksandbarcodes_button.png")
+    allbooksandbarcodes_btn = PhotoImage(file=resource_path("allbooksandbarcodes_button.png"))
     allbooksandbarcodes_label = Label(image=allbooksandbarcodes_btn)
 
-    barcodegenerator_btn = PhotoImage(file="assets\\barcodegenerator_button.png")
+    barcodegenerator_btn = PhotoImage(file=resource_path("barcodegenerator_button.png"))
     barcodegenerator_label = Label(image=barcodegenerator_btn)
 
-    latestupdate_btn = PhotoImage(file="assets\\latestupdate_button.png")
+    latestupdate_btn = PhotoImage(file=resource_path("latestupdate_button.png"))
     latestupdate_label = Label(image=latestupdate_btn)
 
-    bookcounter_btn = PhotoImage(file="assets\\bookcounter_button.png")
+    bookcounter_btn = PhotoImage(file=resource_path("bookcounter_button.png"))
     bookcounterh_label = Label(image=bookcounter_btn)
 
-    real_allbooksandbarcodes_btn = Button(root, text="Start", image=allbooksandbarcodes_btn, bg="#3A1212",
-                                          activebackground="#3A1212", border=0, command=all_books_and_barcodes)
-    row1_label.grid(row=0, column=1)
-    real_allbooksandbarcodes_btn.grid(row=0, column=2)
+    real_allbooksandbarcodes_btn = Button(root, text="Start", image=allbooksandbarcodes_btn, bg="#252525",
+                                          activebackground="#252525", border=0, command=all_books_and_barcodes)
+    real_allbooksandbarcodes_btn.place(x=360, y=110)
 
-    real_barcodegenerator_btn = Button(root, text="Start", image=barcodegenerator_btn, bg="#3A1212",
-                                       activebackground="#3A1212", border=0, command=barcode_generator)
-    real_barcodegenerator_btn.grid(row=1, column=2)
+    real_barcodegenerator_btn = Button(root, text="Start", image=barcodegenerator_btn, bg="#252525",
+                                       activebackground="#252525", border=0, command=barcode_generator)
+    real_barcodegenerator_btn.place(x=360, y=210)
 
-    real_latestupdate_btn = Button(root, text="Start", image=latestupdate_btn, bg="#3A1212", activebackground="#3A1212",
+    real_latestupdate_btn = Button(root, text="Start", image=latestupdate_btn, bg="#252525", activebackground="#252525",
                                    border=0, command=latest_updates)
-    real_latestupdate_btn.grid(row=2, column=2)
+    real_latestupdate_btn.place(x=360, y=310)
 
-    real_bookcounter_btn = Button(root, text="Start", image=bookcounter_btn, bg="#3A1212", activebackground="#3A1212",
+    real_bookcounter_btn = Button(root, text="Start", image=bookcounter_btn, bg="#252525", activebackground="#252525",
                                   border=0, command=book_counter)
-    real_bookcounter_btn.grid(row=3, column=2)
+    real_bookcounter_btn.place(x=360, y=410)
 
-    exit_btn = PhotoImage(file="assets\\exit_button.png")
+    exit_btn = PhotoImage(file=resource_path("exit_button.png"))
     exit_label = Label(image=exit_btn)
 
-    real_exit_btn = Button(root, text="Start", image=exit_btn, bg="#3A3A3A", width=250, height=200,
-                           activebackground="#3A3A3A", border=0, command=exit)
-    real_exit_btn.place(x=600, y=600)
+    real_exit_btn = Button(root, text="Start", image=exit_btn, bg="#252525", width=80, height=80,
+                           activebackground="#252525", border=0, command=exit)
+    real_exit_btn.place(x=195, y=450)
 
     root.mainloop()
 
 
 root = Tk()
-root.title('Pouyalj Library')
-root.geometry('1900x1000')
-root.configure(bg="#ffffff", background="black")
-root.iconbitmap("assets\\Logo.ico")
-bg = PhotoImage(file="assets\\intro.png")
-bg_label = Label(root, image=bg)
-bg_label.place(x=0, y=0)
+root.title('PyLibrary')
+root.maxsize(width=475, height=550)
+root.minsize(width=475, height=550)
+root.iconbitmap(resource_path("Logo.ico"))
 
-start_the_program_btn = PhotoImage(file="assets\\starttheprogram_button.png")
-start_the_program_label = Label(image=start_the_program_btn)
-real_start_the_program_btn = Button(root, text="Start", image=start_the_program_btn, bg="black", width=250, height=200,
-                                    activebackground="black", border=0, command=main_menu)
-real_start_the_program_btn.place(x=725, y=550)
+main_menu()
 
 root.mainloop()

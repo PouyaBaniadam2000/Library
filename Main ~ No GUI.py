@@ -1,5 +1,3 @@
-''' To run this code in your IDE , you should install the "openpyxl" and "panads" library'''
-
 import random
 from openpyxl import load_workbook
 from pandas import DataFrame
@@ -8,7 +6,7 @@ from pandas import DataFrame
 def read_from_excel():
     global all_rows
     global book
-    book = load_workbook("database\\LibraryDataBase.xlsx")
+    book = load_workbook("DataBase\\LibraryDataBase.xlsx")
     global sheet
     sheet = book.active
     rows = sheet.rows
@@ -41,7 +39,7 @@ def list_of_all_books():
     for books_name in all_rows:
         all_books.append(books_name["book_name"])
 
-    print("Here are all the books we have in the database:")
+    print("Here are all the books we have in the DataBase:")
     print("\n")
     for _ in all_books:
         print(_, end="\n")
@@ -147,7 +145,7 @@ def edit_excel():
         if book not in all_books or book not in final_all_books:
             print(
                 "********************************************************************************************************************************************")
-            print("It seems this book you wanna edit , does't exists in the database !")
+            print("It seems this book you wanna edit , does't exists in the DataBase !")
             print(
                 "********************************************************************************************************************************************")
 
@@ -274,7 +272,7 @@ def edit_excel():
                     all_rows.append(temp_dict)
 
                     df = DataFrame.from_dict(all_rows)
-                    df.to_excel("database\\LibraryDataBase.xlsx")
+                    df.to_excel("DataBase\\LibraryDataBase.xlsx")
                     print(
                         "********************************************************************************************************************************************")
                     print('Updated Succesfully !')
@@ -293,7 +291,7 @@ def edit_excel():
         if bar_code not in temp_list2:
             print(
                 "********************************************************************************************************************************************")
-            print("It seems this book you wanna edit , does't exists in the database !")
+            print("It seems this book you wanna edit , does't exists in the DataBase !")
             print(
                 "********************************************************************************************************************************************")
 
@@ -425,7 +423,7 @@ def edit_excel():
                     all_rows.append(temp_dict)
 
                     df = DataFrame.from_dict(all_rows)
-                    df.to_excel("database\\LibraryDataBase.xlsx")
+                    df.to_excel("DataBase\\LibraryDataBase.xlsx")
                     print(
                         "********************************************************************************************************************************************")
                     print('Updated Succesfully !')
@@ -474,7 +472,7 @@ def del_book():
                     pass
 
         df = DataFrame.from_dict(all_rows)
-        df.to_excel("database\\LibraryDataBase.xlsx")
+        df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
     if method == "2":
         bar_code_to_be_removed = input("Enter the bar-code of the book you wish to delete : ")
@@ -510,7 +508,7 @@ def del_book():
     # print("********************************************************************************************************************************************")
 
     df = DataFrame.from_dict(all_rows)
-    df.to_excel("database\\LibraryDataBase.xlsx")
+    df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
 
 def add_book():
@@ -603,7 +601,7 @@ def add_book():
     elif int(new_bar_code) in final_all_bar_codes:
         print(
             "********************************************************************************************************************************************")
-        print("Sorry ! It seems that this book already exists in database.")
+        print("Sorry ! It seems that this book already exists in DataBase.")
         print(
             "********************************************************************************************************************************************")
 
@@ -650,7 +648,7 @@ def add_book():
             "********************************************************************************************************************************************")
 
         df = DataFrame.from_dict(all_rows)
-        df.to_excel("database\\LibraryDataBase.xlsx")
+        df.to_excel("DataBase\\LibraryDataBase.xlsx")
 
         del temporary_dict
 
@@ -730,7 +728,7 @@ def update():
 def book_count():
     print(
         "********************************************************************************************************************************************")
-    print("Total books in database :", len(all_rows))
+    print("Total books in DataBase :", len(all_rows))
     print(
         "********************************************************************************************************************************************")
 
